@@ -8,7 +8,10 @@ export default ({ height, width }) => {
 
   var stats = new Stats();
   stats.showPanel(0);
-  document.body.appendChild(stats.dom);
+  const _stats = stats.dom;
+  _stats.style.left = 'initial';
+  _stats.style.right = 0;
+  document.body.appendChild(_stats);
 
   useEffect(() => {
     async function loadVideo() {
