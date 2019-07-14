@@ -93,8 +93,9 @@ function App() {
       const net = await posenet.load({
         architecture: 'MobileNetV1',
         outputStride: 16,
-        inputResolution: 513,
-        multiplier: 0.75,
+        inputResolution: 257,
+        multiplier: 0.5,
+        quantBytes: 2,
       });
 
       let video;
