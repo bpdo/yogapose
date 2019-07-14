@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
+import Stats from 'stats.js';
 
 function App() {
+  var stats = new Stats();
+  stats.showPanel(0);
+  document.body.appendChild(stats.dom);
+
   const videoWidth = 600;
   const videoHeight = 600;
   const minPoseConfidence = 0.1;
@@ -51,6 +56,8 @@ function App() {
       canvas.height = videoHeight;
 
       async function poseDetectionFrame() {
+        stats.begin();
+
         const pose = await net.estimateSinglePose(video, {
           flipHorizontal: true,
         });
@@ -73,6 +80,8 @@ function App() {
             }
           });
         }
+
+        stats.end();
 
         window.requestAnimationFrame(poseDetectionFrame);
       }
