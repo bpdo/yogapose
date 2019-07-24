@@ -1,17 +1,42 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
-import Stats from 'stats.js';
 
-export default ({ height, width }) => {
+export default ({ children, height, width, onPoseChange }) => {
+  const [init, setInit] = useState(false);
+  const [net, setNet] = useState(null);
+  const [video, setVideo] = useState(null);
+
   const minPoseConfidence = 0.1;
-  const minPartConfidence = 0.5;
+  // const minPartConfidence = 0.5;
 
-  var stats = new Stats();
-  stats.showPanel(0);
-  const _stats = stats.dom;
-  _stats.style.left = 'initial';
-  _stats.style.right = 0;
-  document.body.appendChild(_stats);
+  function detectPoseInRealTime(video, net) {
+    const canvas = document.getElementById('output');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = width;
+    canvas.height = height;
+
+    async function poseDetectionFrame() {
+      const pose = await net.estimateSinglePose(video, {
+        flipHorizontal: true,
+      });
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.save();
+      ctx.scale(-1, 1);
+      ctx.translate(-width, 0);
+      ctx.drawImage(video, 0, 0, width, height);
+      ctx.restore();
+
+      if (onPoseChange && pose.score >= minPoseConfidence) {
+        onPoseChange(pose);
+      }
+
+      window.requestAnimationFrame(poseDetectionFrame);
+    }
+
+    poseDetectionFrame();
+  }
 
   useEffect(() => {
     async function loadVideo() {
@@ -49,49 +74,8 @@ export default ({ height, width }) => {
       });
     }
 
-    function detectPoseInRealTime(video, net) {
-      const canvas = document.getElementById('output');
-      const ctx = canvas.getContext('2d');
-
-      canvas.width = width;
-      canvas.height = height;
-
-      async function poseDetectionFrame() {
-        stats.begin();
-
-        const pose = await net.estimateSinglePose(video, {
-          flipHorizontal: true,
-        });
-
-        ctx.clearRect(0, 0, width, height);
-        ctx.save();
-        ctx.scale(-1, 1);
-        ctx.translate(-width, 0);
-        ctx.drawImage(video, 0, 0, width, height);
-        ctx.restore();
-
-        if (pose.score >= minPoseConfidence) {
-          pose.keypoints.forEach(keypoint => {
-            const { position, score } = keypoint;
-
-            if (score >= minPartConfidence) {
-              const { x, y } = position;
-              ctx.fillStyle = 'blue';
-              ctx.fillRect(x - 3, y - 3, 6, 6);
-            }
-          });
-        }
-
-        stats.end();
-
-        window.requestAnimationFrame(poseDetectionFrame);
-      }
-
-      poseDetectionFrame();
-    }
-
     async function loadModel() {
-      const net = await posenet.load({
+      const _net = await posenet.load({
         architecture: 'MobileNetV1',
         outputStride: 16,
         inputResolution: 257,
@@ -99,23 +83,30 @@ export default ({ height, width }) => {
         quantBytes: 2,
       });
 
-      let video;
+      setNet(_net);
 
       try {
-        video = await loadVideo();
+        const _video = await loadVideo();
+
+        setVideo(_video);
       } catch (e) {
         // [todo] update the state error
         throw e;
       }
 
-      detectPoseInRealTime(video, net);
+      // detectPoseInRealTime(video, net);
     }
 
     loadModel();
-  });
+  }, [height, width]);
+
+  if (!init && net && video) {
+    setInit(true);
+    detectPoseInRealTime(video, net);
+  }
 
   return (
-    <div id="main">
+    <div id="main" style={{ position: 'relative' }}>
       <video
         id="video"
         playsInline
@@ -129,7 +120,13 @@ export default ({ height, width }) => {
           display: 'none',
         }}
       />
-      <canvas id="output" height={height} width={width} />
+      <canvas
+        id="output"
+        height={height}
+        width={width}
+        style={{ zIndex: 1, position: 'absolute' }}
+      />
+      {children}
     </div>
   );
 };
