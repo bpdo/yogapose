@@ -22,26 +22,54 @@ export default ({ height, pose, width }) => {
     const leftEar = pose.keypoints.find(p => p.part === 'leftEar');
     const rightEar = pose.keypoints.find(p => p.part === 'rightEar');
 
-    const nose =
-      Math.abs(rightEye.position.x - leftEye.position.x) / 2 +
-      leftEye.position.x;
-    const glassesWidth = Math.abs(leftEar.position.x - rightEar.position.x);
-    const ratio = glassesWidth / imageWidth;
-
     context.clearRect(0, 0, height, width);
 
-    if (leftEye.score >= 0.1) {
+    if (
+      leftEye.score >= 0.5 &&
+      rightEye.score >= 0.5 &&
+      leftEar.score >= 0.25 &&
+      rightEar.score >= 0.25
+    ) {
+      // nose x point
+      const x =
+        Math.abs(rightEye.position.x - leftEye.position.x) / 2 +
+        Math.min(leftEye.position.x, rightEye.position.x);
+
+      // nose y point
+      const y =
+        Math.abs(rightEye.position.y - leftEye.position.y) / 2 +
+        Math.min(leftEye.position.y, rightEye.position.y);
+
+      // determine the glasses width based on ear position
+      const glassesWidth =
+        Math.abs(leftEar.position.x - rightEar.position.x) * 1.1;
+
+      // glasses ration
+      const ratio = glassesWidth / imageWidth;
+
+      // calculate rotation
+      const a = rightEye.position.x - leftEye.position.x;
+      const b = rightEye.position.y - leftEye.position.y;
+      const angle = Math.atan2(b, a);
+
+      // translate to the nose
+      context.translate(x, y);
+
+      // rotate based on the eye rotation
+      context.rotate(angle);
+
+      // draw the glasses
       context.drawImage(
         glasses,
-        0,
-        0,
-        imageWidth,
-        imageHeight,
-        nose - glassesWidth / 2,
-        leftEye.position.y - 25,
+        -(glassesWidth / 2),
+        -30,
         glassesWidth,
         imageHeight * ratio
       );
+
+      // reset the context
+      context.rotate(-angle);
+      context.translate(-x, -y);
     }
   }
 
