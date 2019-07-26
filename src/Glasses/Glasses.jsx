@@ -30,19 +30,19 @@ export default ({ height, pose, width }) => {
       leftEar.score >= 0.25 &&
       rightEar.score >= 0.25
     ) {
-      // nose x point
+      // calculate nose x point
       const x =
         Math.abs(rightEye.position.x - leftEye.position.x) / 2 +
         Math.min(leftEye.position.x, rightEye.position.x);
 
-      // nose y point
+      // calculate nose y point
       const y =
         Math.abs(rightEye.position.y - leftEye.position.y) / 2 +
         Math.min(leftEye.position.y, rightEye.position.y);
 
       // determine the glasses width based on ear position
       const glassesWidth =
-        Math.abs(leftEar.position.x - rightEar.position.x) * 1.1;
+        Math.abs(leftEar.position.x - rightEar.position.x) * 1.1; // [todo] determine scale
 
       // glasses ration
       const ratio = glassesWidth / imageWidth;
@@ -62,7 +62,7 @@ export default ({ height, pose, width }) => {
       context.drawImage(
         glasses,
         -(glassesWidth / 2),
-        -30,
+        -30, // [todo] determine y translation
         glassesWidth,
         imageHeight * ratio
       );
@@ -75,15 +75,15 @@ export default ({ height, pose, width }) => {
 
   return (
     <>
-      <div style={{ display: 'none' }}>
-        <img id="image-1" src="sunglasses.png" alt="glasses" />
-      </div>
       <canvas
         id="glasses"
         height={height}
         width={width}
         style={{ zIndex: 2, position: 'absolute' }}
       />
+      <div style={{ display: 'none' }}>
+        <img id="image-1" src="sunglasses.png" alt="glasses" />
+      </div>
     </>
   );
 };
