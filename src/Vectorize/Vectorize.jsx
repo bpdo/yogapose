@@ -98,7 +98,5 @@ export default ({ height, hud, pose, width }) => {
       width={width}
       style={{ zIndex: 2, position: 'absolute' }}
     />
-  ) : (
-    <div />
-  );
+  ) : null;
 };
