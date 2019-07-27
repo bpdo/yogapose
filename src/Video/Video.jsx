@@ -60,7 +60,7 @@ export default ({ children, height, width, onPoseChange }) => {
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: false,
         video: {
-          facingMode: 'user',
+          facingMode: 'environment',
           width,
           height,
         },
