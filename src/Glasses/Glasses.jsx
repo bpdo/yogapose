@@ -82,7 +82,7 @@ export default ({ height, pose, width }) => {
         style={{ zIndex: 2, position: 'absolute' }}
       />
       <div style={{ display: 'none' }}>
-        <img id="image-1" src="sunglasses.png" alt="glasses" />
+        <img id="image-1" src="ShutterGlasses.svg" alt="glasses" />
       </div>
     </>
   );
