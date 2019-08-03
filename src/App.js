@@ -8,6 +8,8 @@ import Video from './Video';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  const _height = 500;
+  const _width = 500;
   const [pose, setPose] = useState(null);
 
   const handlePoseChange = pose => {
@@ -15,11 +17,11 @@ function App() {
   };
 
   return (
-    <div className="container-fluid vh-100 d-flex flex-column ">
+    <div className='container-fluid vh-100 d-flex flex-column '>
       <Navbar />
-      <Video height={500} width={500} onPoseChange={handlePoseChange}>
-        <Vectorize height={500} hud={true} pose={pose} width={500} />
-        <Glasses height={500} width={500} pose={pose} />
+      <Video height={_height} width={_width} onPoseChange={handlePoseChange}>
+        <Vectorize height={_height} pose={pose} width={_width} />
+        <Glasses height={_height} width={_width} pose={pose} />
       </Video>
     </div>
   );

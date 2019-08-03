@@ -1,13 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
 
+import {
+  leftEye,
+  rightEye,
+  leftEar,
+  rightEar,
+  leftShoulder,
+  rightShoulder,
+  leftElbow,
+  rightElbow,
+  leftWrist,
+  rightWrist,
+  leftHip,
+  rightHip,
+  leftKnee,
+  rightKnee,
+  leftAnkle,
+  rightAnkle,
+} from './Parts';
+
 export default ({ children, height, width, onPoseChange }) => {
   const [init, setInit] = useState(false);
   const [net, setNet] = useState(null);
   const [video, setVideo] = useState(null);
 
   const minPoseConfidence = 0.1;
-  // const minPartConfidence = 0.5;
+  const minPartConfidence = 0.5;
+
+  const createVector = (a, b, pose) => {
+    const _p1 = pose.keypoints[a];
+    const _p2 = pose.keypoints[b];
+
+    // check if the parts were found
+    if (!_p1 || !_p2) return;
+
+    // check if the part scores are above the min confidence
+    if (_p1.score < minPartConfidence || _p2.score < minPartConfidence) return;
+
+    // create the vector object
+    pose.vectors.push({
+      name: `${a}.${b}`,
+      points: [_p1, _p2],
+      vector: [
+        _p1.position.x - _p2.position.x,
+        _p1.position.y - _p2.position.y,
+      ],
+    });
+  };
 
   function detectPoseInRealTime(video, net) {
     const canvas = document.getElementById('output');
@@ -29,6 +69,29 @@ export default ({ children, height, width, onPoseChange }) => {
       ctx.restore();
 
       if (onPoseChange && pose.score >= minPoseConfidence) {
+        pose.vectors = [];
+
+        // calculate vectors
+        createVector(leftEye, leftEar, pose);
+        createVector(rightEye, rightEar, pose);
+
+        createVector(leftShoulder, leftElbow, pose);
+        createVector(leftElbow, leftWrist, pose);
+
+        createVector(rightShoulder, rightElbow, pose);
+        createVector(rightElbow, rightWrist, pose);
+
+        createVector(leftShoulder, rightShoulder, pose);
+
+        createVector(leftShoulder, leftHip, pose);
+        createVector(rightShoulder, rightHip, pose);
+
+        createVector(leftHip, leftKnee, pose);
+        createVector(rightHip, rightKnee, pose);
+
+        createVector(leftKnee, leftAnkle, pose);
+        createVector(rightKnee, rightAnkle, pose);
+
         onPoseChange(pose);
       }
 
@@ -106,9 +169,9 @@ export default ({ children, height, width, onPoseChange }) => {
   }
 
   return (
-    <div id="main" style={{ position: 'relative' }}>
+    <div id='main' style={{ position: 'relative' }}>
       <video
-        id="video"
+        id='video'
         playsInline
         height={height}
         width={width}
@@ -121,7 +184,7 @@ export default ({ children, height, width, onPoseChange }) => {
         }}
       />
       <canvas
-        id="output"
+        id='output'
         height={height}
         width={width}
         style={{ zIndex: 1, position: 'absolute' }}
