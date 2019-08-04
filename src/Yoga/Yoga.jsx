@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { score } from './PoseService';
+import PoseService from './PoseService';
 
 export default ({ options, pose }) => {
   const { height, name, width, zIndex } = options;
@@ -11,15 +11,20 @@ export default ({ options, pose }) => {
     const canvas = document.getElementById('yoga');
     const _context = canvas.getContext('2d');
 
-    _context.font = '30px arial';
-    _context.fillText('tadasana pose', 10, 50);
+    _context.fillStyle = 'white';
+    _context.fillRect(10, 450, 300, 35);
+
+    _context.font = '24px arial';
+    _context.fillStyle = 'deeppink';
+    _context.fillText('tadasana pose', 20, 475);
 
     setContext(_context);
     setReady(true);
   }, []);
 
   if (ready && context && pose) {
-    console.log(score(pose, name));
+    const score = Math.round(PoseService.score(pose, name));
+    console.log(score);
   }
 
   return (

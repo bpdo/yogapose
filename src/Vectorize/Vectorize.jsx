@@ -21,7 +21,7 @@ export default ({ height, pose, width }) => {
       Object.keys(pose.vectors).forEach(key => {
         const [_p1, _p2] = pose.vectors[key].points;
         context.lineWidth = 3;
-        context.strokeStyle = 'DeepPink';
+        context.strokeStyle = 'DodgerBlue';
         context.beginPath();
         context.moveTo(_p1.position.x, _p1.position.y);
         context.lineTo(_p2.position.x, _p2.position.y);

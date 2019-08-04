@@ -1,6 +1,6 @@
 import similarity from 'compute-cosine-similarity';
 
-export const TADASANA = 'tadasana';
+const TADASANA = 'tadasana';
 
 const _models = {
   tadasana: {
@@ -25,7 +25,7 @@ const _models = {
   },
 };
 
-export const score = (pose, name) => {
+const score = (pose, name) => {
   let score = 0;
 
   if (pose.vectors && _models[name]) {
@@ -42,4 +42,9 @@ export const score = (pose, name) => {
   }
 
   return score;
+};
+
+export default {
+  TADASANA,
+  score,
 };
