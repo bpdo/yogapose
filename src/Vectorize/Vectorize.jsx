@@ -18,8 +18,8 @@ export default ({ height, pose, width }) => {
 
     if (pose.vectors) {
       // loop through the vectors
-      pose.vectors.forEach(vector => {
-        const [_p1, _p2] = vector.points;
+      Object.keys(pose.vectors).forEach(key => {
+        const [_p1, _p2] = pose.vectors[key].points;
         context.lineWidth = 3;
         context.strokeStyle = 'DeepPink';
         context.beginPath();
