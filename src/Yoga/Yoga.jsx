@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import similarity from 'compute-cosine-similarity';
+import { score } from './PoseService';
 
-export default ({ height, pose, width, zIndex }) => {
+export default ({ options, pose }) => {
+  const { height, name, width, zIndex } = options;
+
   const [context, setContext] = useState(null);
   const [ready, setReady] = useState(false);
 
@@ -17,12 +19,7 @@ export default ({ height, pose, width, zIndex }) => {
   }, []);
 
   if (ready && context && pose) {
-    const shoulders = [1, 0];
-
-    // add pose scoring...
-    if (pose.vectors && pose.vectors['5.6']) {
-      console.log(Math.abs(similarity(pose.vectors['5.6'], shoulders)));
-    }
+    console.log(score(pose, name));
   }
 
   return (
