@@ -5,7 +5,6 @@ export default ({ options, pose }) => {
   const { height, name, width, zIndex } = options;
 
   const [context, setContext] = useState(null);
-  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const canvas = document.getElementById('yoga');
@@ -16,13 +15,12 @@ export default ({ options, pose }) => {
 
     _context.font = '24px arial';
     _context.fillStyle = 'deeppink';
-    _context.fillText('tadasana pose', 20, 475);
+    _context.fillText(`${name} Pose`, 20, 475);
 
     setContext(_context);
-    setReady(true);
-  }, []);
+  }, [name]);
 
-  if (ready && context && pose) {
+  if (context && pose) {
     const score = Math.round(PoseService.score(pose, name));
     console.log(score);
   }
