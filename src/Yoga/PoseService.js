@@ -1,9 +1,9 @@
 import similarity from 'compute-cosine-similarity';
 
-const TADASANA = 'tadasana';
+const TADASANA = 'Tadasana';
 
 const _models = {
-  tadasana: {
+  Tadasana: {
     // eyes
     '1.2': [1, 0],
     // shoulders
