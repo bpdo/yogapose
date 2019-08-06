@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 
 import Navbar from './Navbar';
-import Glasses from './Glasses';
+// import Glasses from './Glasses';
 import Vectorize from './Vectorize';
-import Video from './Video';
+import PoseNet from './PoseNet';
+import Yoga from './Yoga';
+
+import PoseService from './Yoga/PoseService';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -19,10 +22,19 @@ function App() {
   return (
     <div className='container-fluid vh-100 d-flex flex-column '>
       <Navbar />
-      <Video height={_height} width={_width} onPoseChange={handlePoseChange}>
+      <PoseNet height={_height} width={_width} onPoseChange={handlePoseChange}>
+        <Yoga
+          options={{
+            height: _height,
+            name: PoseService.TADASANA,
+            width: _width,
+            zIndex: 3,
+          }}
+          pose={pose}
+        />
         <Vectorize height={_height} pose={pose} width={_width} />
-        <Glasses height={_height} width={_width} pose={pose} />
-      </Video>
+        {/* <Glasses height={_height} width={_width} pose={pose} /> */}
+      </PoseNet>
     </div>
   );
 }

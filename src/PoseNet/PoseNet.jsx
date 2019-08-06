@@ -39,14 +39,14 @@ export default ({ children, height, width, onPoseChange }) => {
     if (_p1.score < minPartConfidence || _p2.score < minPartConfidence) return;
 
     // create the vector object
-    pose.vectors.push({
+    pose.vectors[`${a}.${b}`] = {
       name: `${a}.${b}`,
       points: [_p1, _p2],
       vector: [
         _p1.position.x - _p2.position.x,
         _p1.position.y - _p2.position.y,
       ],
-    });
+    };
   };
 
   function detectPoseInRealTime(video, net) {
@@ -69,9 +69,11 @@ export default ({ children, height, width, onPoseChange }) => {
       ctx.restore();
 
       if (onPoseChange && pose.score >= minPoseConfidence) {
-        pose.vectors = [];
+        pose.vectors = {};
 
         // calculate vectors
+        createVector(leftEye, rightEye, pose);
+
         createVector(leftEye, leftEar, pose);
         createVector(rightEye, rightEar, pose);
 
