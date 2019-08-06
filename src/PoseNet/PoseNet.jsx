@@ -88,6 +88,8 @@ export default ({ children, height, width, onPoseChange }) => {
         createVector(leftShoulder, leftHip, pose);
         createVector(rightShoulder, rightHip, pose);
 
+        createVector(leftHip, rightHip, pose);
+
         createVector(leftHip, leftKnee, pose);
         createVector(rightHip, rightKnee, pose);
 
