@@ -1,11 +1,15 @@
 import similarity from 'compute-cosine-similarity';
 
 import TadasanaModel, { Tadasana } from './Pose/Tadasana';
+import VirabhadrasanaIIModel, {
+  VirabhadrasanaII,
+} from './Pose/VirabhadrasanaII';
 
-// build a list of known models
 const _models = {};
 
+// build a list of known models
 _models[Tadasana] = TadasanaModel;
+_models[VirabhadrasanaII] = VirabhadrasanaIIModel;
 
 const score = (pose, name) => {
   let score = 0;
