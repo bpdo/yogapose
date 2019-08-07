@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import PoseService from './PoseService';
+import Score from './ScoreService';
 
-export default ({ options, pose }) => {
-  const { height, name, width, zIndex } = options;
+export default ({ name, options, pose }) => {
+  const { height, width, zIndex } = options;
 
   const [context, setContext] = useState(null);
 
@@ -21,7 +21,7 @@ export default ({ options, pose }) => {
   }, [name]);
 
   if (context && pose) {
-    const score = Math.round(PoseService.score(pose, name));
+    const score = Math.round(Score(pose, name));
     console.log(score);
   }
 
