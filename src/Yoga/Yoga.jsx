@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Score from './ScoreService';
 
 export default ({ name, options, pose }) => {
   const { height, width, zIndex } = options;
@@ -19,11 +18,6 @@ export default ({ name, options, pose }) => {
 
     setContext(_context);
   }, [name]);
-
-  if (context && pose) {
-    const score = Math.round(Score(pose, name));
-    console.log(score);
-  }
 
   return (
     <canvas
