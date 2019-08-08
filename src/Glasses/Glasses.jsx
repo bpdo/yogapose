@@ -76,13 +76,13 @@ export default ({ height, pose, width }) => {
   return (
     <>
       <canvas
-        id="glasses"
+        id='glasses'
         height={height}
         width={width}
         style={{ zIndex: 2, position: 'absolute' }}
       />
       <div style={{ display: 'none' }}>
-        <img id="image-1" src="ShutterGlasses.svg" alt="glasses" />
+        <img id='image-1' src='ShutterGlasses2.svg' alt='glasses' />
       </div>
     </>
   );
