@@ -4,9 +4,9 @@ import Navbar from './Navbar';
 // import Glasses from './Glasses';
 import Vectorize from './Vectorize';
 import PoseNet from './PoseNet';
+import { Tadasana } from './Yoga/Pose/Tadasana';
+import { VirabhadrasanaII } from './Yoga/Pose/VirabhadrasanaII';
 import Yoga from './Yoga';
-
-import PoseService from './Yoga/PoseService';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -24,9 +24,9 @@ function App() {
       <Navbar />
       <PoseNet height={_height} width={_width} onPoseChange={handlePoseChange}>
         <Yoga
+          name={VirabhadrasanaII || Tadasana}
           options={{
             height: _height,
-            name: PoseService.TADASANA,
             width: _width,
             zIndex: 3,
           }}
