@@ -29,7 +29,7 @@ vectors[`${leftKnee}.${leftAnkle}`] = [0, -1];
 vectors[`${rightHip}.${rightKnee}`] = [-1, -1];
 vectors[`${rightKnee}.${rightAnkle}`] = [-1, -1];
 
-export const VirabhadrasanaII = 'VirabhadrasanaII';
+export const VirabhadrasanaII = 'Virabhadrasana II';
 
 export default {
   name: VirabhadrasanaII,
