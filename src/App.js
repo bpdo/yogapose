@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 // import Glasses from './Glasses';
 import Vectorize from './Vectorize';
+import HighScore from './HighScore';
 import PoseNet from './PoseNet';
 import PoseName from './PoseName';
 import PoseScore from './PoseScore';
@@ -43,6 +44,7 @@ function App() {
         <Vectorize height={_height} pose={pose} width={_width} />
         {/* <Glasses height={_height} width={_width} pose={pose} /> */}
       </PoseNet>
+      <HighScore />
     </div>
   );
 }
