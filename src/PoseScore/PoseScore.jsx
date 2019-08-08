@@ -1,16 +1,17 @@
 import React from 'react';
-import PoseScore from '../static/ScoreOverlay.svg';
+import PoseScore from './ScoreOverlay.svg';
+import styles from './PoseScore.css';
 
-const textStyle = {
-  color: 'white',
-};
 export default ({ score }) => {
   return (
-    <div className='text-center p-0 d-flex align-items-center'>
-      <img className='img-fluid position-relative' src={PoseScore} />
-      <h2 className='w-25 position-absolute' style={textStyle}>
-        {score}
-      </h2>
+    <div
+      className='d-flex justify-content-center align-items-center'
+      style={{
+        backgroundImage: `url(${PoseScore})`,
+        ...styles.container,
+      }}
+    >
+      <div className='display-4 m-0 p-0 text-white'>{score}</div>
     </div>
   );
 };
