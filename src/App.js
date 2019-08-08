@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import Navbar from './Navbar';
 // import Glasses from './Glasses';
 import Vectorize from './Vectorize';
 import PoseNet from './PoseNet';
+import PoseName from './PoseName';
 import PoseScore from './PoseScore';
 import { Tadasana } from './Yoga/Pose/Tadasana';
 import { VirabhadrasanaII } from './Yoga/Pose/VirabhadrasanaII';
@@ -27,8 +27,8 @@ function App() {
 
   return (
     <div className='container-fluid vh-100 d-flex flex-column '>
-      <Navbar />
       <PoseScore score={maxScore} />
+      <PoseName name={VirabhadrasanaII || Tadasana} />
       <PoseNet height={_height} width={_width} onPoseChange={handlePoseChange}>
         <Yoga
           name={VirabhadrasanaII || Tadasana}
