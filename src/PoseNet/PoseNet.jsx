@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
-import Score from '../Yoga/ScoreService';
 
 import {
   leftEye,
@@ -21,7 +20,7 @@ import {
   rightAnkle,
 } from './Parts';
 
-export default ({ children, height, width, onPoseChange, name }) => {
+export default ({ children, height, width, onPoseChange }) => {
   const [init, setInit] = useState(false);
   const [net, setNet] = useState(null);
   const [video, setVideo] = useState(null);
@@ -97,7 +96,7 @@ export default ({ children, height, width, onPoseChange, name }) => {
         createVector(leftKnee, leftAnkle, pose);
         createVector(rightKnee, rightAnkle, pose);
 
-        onPoseChange(pose, Math.round(Score(pose, name)));
+        onPoseChange(pose);
       }
 
       window.requestAnimationFrame(poseDetectionFrame);

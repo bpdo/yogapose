@@ -15,23 +15,21 @@ function App() {
   const _height = 500;
   const _width = 500;
   const [pose, setPose] = useState(null);
-  const [score, setScore] = useState(0);
+  const [maxScore, setScore] = useState(0);
 
-  const handlePoseChange = (pose, score) => {
+  const handlePoseChange = pose => {
     setPose(pose);
-    setScore(score);
+  };
+
+  const handleScoreChange = score => {
+    if (score > maxScore) setScore(score);
   };
 
   return (
     <div className='container-fluid vh-100 d-flex flex-column '>
       <Navbar />
-      <PoseScore score={score} />
-      <PoseNet
-        height={_height}
-        width={_width}
-        onPoseChange={handlePoseChange}
-        name={VirabhadrasanaII || Tadasana}
-      >
+      <PoseScore score={maxScore} />
+      <PoseNet height={_height} width={_width} onPoseChange={handlePoseChange}>
         <Yoga
           name={VirabhadrasanaII || Tadasana}
           options={{
@@ -40,6 +38,7 @@ function App() {
             zIndex: 3,
           }}
           pose={pose}
+          onScoreChange={handleScoreChange}
         />
         <Vectorize height={_height} pose={pose} width={_width} />
         {/* <Glasses height={_height} width={_width} pose={pose} /> */}
