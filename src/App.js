@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 // import Glasses from './Glasses';
+import Controls from './Controls';
 import Vectorize from './Vectorize';
 import HighScore from './HighScore';
 import PoseNet from './PoseNet';
@@ -45,6 +46,7 @@ function App() {
         {/* <Glasses height={_height} width={_width} pose={pose} /> */}
       </PoseNet>
       <HighScore />
+      <Controls />
     </div>
   );
 }
