@@ -15,11 +15,14 @@ const score = (pose, name) => {
   let score = 0;
 
   if (pose.vectors && _models[name]) {
-    const parts = Object.keys(_models[name]);
+    const parts = Object.keys(_models[name].vectors);
 
     parts.forEach(part => {
       if (pose.vectors[part]) {
-        const _cs = similarity(pose.vectors[part].vector, _models[name][part]);
+        const _cs = similarity(
+          pose.vectors[part].vector,
+          _models[name].vectors[part]
+        );
         score += Math.abs(_cs);
       }
     });
