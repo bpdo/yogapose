@@ -125,15 +125,15 @@ export default ({ children, height, width, onPoseChange }) => {
 
       const video = document.getElementById('video');
 
-      const stream = await navigator.mediaDevices.getUserMedia({
-        audio: false,
-        video: {
-          facingMode: 'environment',
-          width,
-          height,
-        },
-      });
-      video.srcObject = stream;
+      // const stream = await navigator.mediaDevices.getUserMedia({
+      //   audio: false,
+      //   video: {
+      //     facingMode: 'environment',
+      //     width,
+      //     height,
+      //   },
+      // });
+      // video.srcObject = stream;
 
       return new Promise(resolve => {
         video.onloadedmetadata = () => {
