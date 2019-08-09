@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Score from './ScoreService';
 
 export default ({ name, options, pose, onScoreChange }) => {
