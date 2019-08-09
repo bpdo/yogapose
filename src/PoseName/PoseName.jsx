@@ -1,17 +1,24 @@
 import React from 'react';
-import PoseOverlay from '../static/PoseOverlay.svg';
-
-const textStyle = {
-  color: 'white',
-};
+import PoseOverlay from './PoseOverlay.svg';
+import styles from './PoseName.css';
 
 export default ({ name }) => {
   return (
-    <div className='text-center p-0 d-flex align-items-center'>
-      <img className='img-fluid position-relative' src={PoseOverlay} />
-      <h2 className='w-100 position-absolute' style={textStyle}>
+    <div
+      className='text-center p-0 d-flex align-items-center position-absolute'
+      style={styles.container}
+    >
+      <img
+        className='img-fluid position-relative'
+        src={PoseOverlay}
+        alt={name}
+      />
+      <div
+        className='text-white position-absolute display-4'
+        style={styles.text}
+      >
         {name}
-      </h2>
+      </div>
     </div>
   );
 };
