@@ -173,7 +173,10 @@ export default ({ children, height, width, onPoseChange }) => {
   }
 
   return (
-    <div id='main' style={{ position: 'relative' }}>
+    <div
+      id='main'
+      style={{ marginTop: 75, height, width, backgroundColor: 'black' }}
+    >
       <video
         id='video'
         playsInline

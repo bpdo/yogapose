@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-// import Glasses from './Glasses';
 import Controls from './Controls';
 import Vectorize from './Vectorize';
 import HighScore from './HighScore';
@@ -28,25 +27,39 @@ function App() {
   };
 
   return (
-    <div className='container-fluid vh-100 d-flex flex-column '>
-      <PoseScore score={maxScore} />
-      <PoseName name={VirabhadrasanaII || Tadasana} />
-      <PoseNet height={_height} width={_width} onPoseChange={handlePoseChange}>
-        <Yoga
-          name={VirabhadrasanaII || Tadasana}
-          options={{
-            height: _height,
-            width: _width,
-            zIndex: 3,
-          }}
-          pose={pose}
-          onScoreChange={handleScoreChange}
-        />
-        <Vectorize height={_height} pose={pose} width={_width} />
-        {/* <Glasses height={_height} width={_width} pose={pose} /> */}
-      </PoseNet>
-      <HighScore />
-      <Controls />
+    <div className='container-fluid vh-100 d-flex flex-column'>
+      <div className='d-flex flex-row justify-content-center align-items-start'>
+        <div
+          className='d-flex flex-column position-relative'
+          style={{ width: _width + 50 }}
+        >
+          <PoseScore score={maxScore} />
+          <PoseName name={VirabhadrasanaII || Tadasana} />
+          <PoseNet
+            height={_height}
+            width={_width}
+            onPoseChange={handlePoseChange}
+          >
+            <Yoga
+              name={VirabhadrasanaII || Tadasana}
+              options={{
+                height: _height,
+                width: _width,
+                zIndex: 3,
+              }}
+              pose={pose}
+              onScoreChange={handleScoreChange}
+            />
+            <Vectorize height={_height} pose={pose} width={_width} />
+          </PoseNet>
+        </div>
+        <div className='d-flex'>
+          <HighScore options={{ height: _height + 100 }} />
+        </div>
+      </div>
+      <div className='d-flex justify-content-center'>
+        <Controls />
+      </div>
     </div>
   );
 }
