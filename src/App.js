@@ -18,6 +18,21 @@ function App() {
   const _width = 500;
   const [pose, setPose] = useState(null);
   const [maxScore, setScore] = useState(0);
+  const [leaders, setLeaders] = useState([
+    { name: 'Zack', score: 23 },
+    { name: 'Kelly', score: 18 },
+    { name: 'Screech', score: 1 },
+    { name: 'Slater', score: 21 },
+    { name: 'Jessie', score: 22 },
+    { name: 'Lisa', score: 13 },
+    { name: 'Mr. B', score: 9 },
+    { name: 'Tori', score: 13 },
+  ]);
+
+  const handleNewScore = newScore => {
+    leaders.push(newScore);
+    setLeaders(leaders);
+  };
 
   const handlePoseChange = pose => {
     setPose(pose);
@@ -60,7 +75,7 @@ function App() {
           </PoseNet>
         </div>
         <div className='d-flex'>
-          <HighScores options={{ height: _height + 100 }} />
+          <HighScores options={{ height: _height + 100 }} leaders={leaders} />
         </div>
       </div>
       <div className='d-flex justify-content-center'>
