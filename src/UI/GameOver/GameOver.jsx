@@ -1,53 +1,26 @@
 import React from 'react';
-import Score from './Score.svg';
+import Initials from './Initials';
+import Score from './Score';
+import Title from './Title';
+import styles from './GameOver.css';
 
 export default () => {
   return (
-    <div
-      className='d-flex flex-column justify-content-end align-items-center'
-      style={{
-        zIndex: 1000,
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundAttchment: 'fixed',
-        backgroundColor: 'rgba(0, 0, 0, .8)',
-        backgroundImage: `url(${Score})`,
-        backgroundSize: 'cover',
-        backgroundPositionX: 'center',
-        backgroundPositionY: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
+    <>
       <div
-        className='text-white'
-        style={{
-          fontSize: '5rem',
-          fontFamily: 'MvBoli',
-          marginBottom: '10rem',
-          paddingRight: '7rem',
-        }}
+        className='d-flex flex-column justify-content-center align-items-center'
+        style={styles.container}
       >
-        99
+        <div
+          className='d-flex flex-column justify-content-around align-items-center py-4'
+          style={styles.box}
+        >
+          <Title text='Game Over!' />
+          <Score score={99} />
+          <Initials />
+        </div>
       </div>
-      <div
-        className='text-white'
-        style={{
-          marginBottom: 175,
-          fontSize: '4rem',
-          fontFamily: 'MvBoli',
-        }}
-      >
-        <input
-          style={{
-            textAlign: 'center',
-            backgroundColor: 'black',
-            color: 'white',
-          }}
-        />
-      </div>
-    </div>
+      <div style={styles.overlay} />
+    </>
   );
 };
