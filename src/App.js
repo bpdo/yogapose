@@ -11,6 +11,7 @@ import { Tadasana } from './Yoga/Pose/Tadasana';
 import { VirabhadrasanaII } from './Yoga/Pose/VirabhadrasanaII';
 import Yoga from './Yoga';
 
+import './fonts/mvboli.ttf';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {

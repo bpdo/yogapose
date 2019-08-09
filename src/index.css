@@ -10,7 +10,7 @@ body {
 
 @font-face {
   font-family: 'MvBoli';
-  src: local('MvBoli'), url(/fonts/mvboli.ttf) format('truetype');
+  src: local('MvBoli'), url('./fonts/mvboli.ttf') format('truetype');
 }
 
 code {
