@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
-import Controls from './Controls';
+import Background from './Background.svg';
+import Controls from './UI/Controls';
 import Vectorize from './Vectorize';
-import HighScore from './HighScore';
+import HighScores from './UI/HighScores';
 import PoseNet from './PoseNet';
-import PoseName from './PoseName';
-import PoseScore from './PoseScore';
+import PoseName from './UI/PoseName';
+import PoseScore from './UI/PoseScore';
 import { Tadasana } from './Yoga/Pose/Tadasana';
 import { VirabhadrasanaII } from './Yoga/Pose/VirabhadrasanaII';
 import Yoga from './Yoga';
@@ -27,7 +28,12 @@ function App() {
   };
 
   return (
-    <div className='container-fluid vh-100 d-flex flex-column'>
+    <div
+      className='container-fluid vh-100 d-flex flex-column'
+      style={{
+        backgroundImage: `url(${Background})`,
+      }}
+    >
       <div className='d-flex flex-row justify-content-center align-items-start'>
         <div
           className='d-flex flex-column position-relative'
@@ -54,7 +60,7 @@ function App() {
           </PoseNet>
         </div>
         <div className='d-flex'>
-          <HighScore options={{ height: _height + 100 }} />
+          <HighScores options={{ height: _height + 100 }} />
         </div>
       </div>
       <div className='d-flex justify-content-center'>

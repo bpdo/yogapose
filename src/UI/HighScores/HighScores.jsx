@@ -1,5 +1,5 @@
 import React from 'react';
-import HighScore from './HighScore.svg';
+import HighScore from './HighScores.svg';
 
 export default ({ options }) => {
   const { height } = options;
