@@ -11,7 +11,7 @@ export default ({ score }) => {
         ...styles.container,
       }}
     >
-      <div className='display-4 text-white' style={styles.text}>
+      <div className='text-white' style={styles.text}>
         {score}
       </div>
     </div>

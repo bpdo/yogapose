@@ -4,9 +4,11 @@ export default {
     zIndex: 100,
   },
   text: {
-    transform: 'rotate(-5deg)',
-    left: 80,
     bottom: 42,
+    left: 80,
+    fontFamily: 'MvBoli',
     fontSize: '1.75rem',
+    textShadow: '5px 1px #333333',
+    transform: 'rotate(-5deg)',
   },
 };
