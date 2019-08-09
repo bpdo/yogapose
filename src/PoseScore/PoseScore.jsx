@@ -5,13 +5,15 @@ import styles from './PoseScore.css';
 export default ({ score }) => {
   return (
     <div
-      className='d-flex justify-content-center align-items-center'
+      className='d-flex justify-content-center align-items-center align-self-end position-absolute'
       style={{
         backgroundImage: `url(${PoseScore})`,
         ...styles.container,
       }}
     >
-      <div className='display-4 m-0 p-0 text-white'>{score}</div>
+      <div className='display-4 text-white' style={styles.text}>
+        {score}
+      </div>
     </div>
   );
 };

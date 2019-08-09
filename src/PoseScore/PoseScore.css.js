@@ -1,9 +1,16 @@
 export default {
   container: {
-    backgroupdPositionY: 'bottom',
+    backgroundPositionX: 'center',
+    backgroundPositionY: 'center',
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
+    backgroundSize: 'contain',
+    top: 0,
     width: 200,
-    height: 200,
+    zIndex: 100,
+  },
+  text: {
+    marginTop: 40,
+    marginBottom: 40,
+    fontSize: '3rem',
   },
 };
