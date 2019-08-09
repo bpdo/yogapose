@@ -10,7 +10,7 @@ export default ({ onInitialsChanged }) => {
 
   const handleInitialsKeyPress = event => {
     if (event.key === 'Enter') {
-      onInitialsChanged(initials);
+      onInitialsChanged(initials.toUpperCase());
     }
   };
 
