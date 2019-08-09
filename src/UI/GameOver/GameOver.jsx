@@ -4,7 +4,14 @@ import Score from './Score';
 import Title from './Title';
 import styles from './GameOver.css';
 
-export default () => {
+export default ({ score, onNewScore }) => {
+  const handleInitialsChanged = initials => {
+    onNewScore({
+      initials,
+      score: score,
+    });
+  };
+
   return (
     <>
       <div
@@ -16,8 +23,8 @@ export default () => {
           style={styles.box}
         >
           <Title text='Game Over!' />
-          <Score score={99} />
-          <Initials />
+          <Score score={score} />
+          <Initials onInitialsChanged={handleInitialsChanged} />
         </div>
       </div>
       <div style={styles.overlay} />

@@ -27,6 +27,7 @@ function App() {
   const _height = 500;
   const _width = 500;
 
+  const [gameOver, setGameOver] = useState(false);
   const [pose, setPose] = useState(null);
   const [maxScore, setScore] = useState(0);
   const [glasses, setGlasses] = useState(false);
@@ -52,9 +53,10 @@ function App() {
     VECTORS_MODE: () => setVectors(true),
   };
 
-  const handleNewScore = newScore => {
-    leaders.push(newScore);
+  const handleNewScore = ({ initials, score }) => {
+    leaders.push({ name: initials, score });
     setLeaders(leaders);
+    setGameOver(false);
   };
 
   const handlePoseChange = pose => {
@@ -108,8 +110,10 @@ function App() {
           </div>
         </div>
         <div className='d-flex justify-content-center'>
-          <Controls />
-          <GameOver />
+          <Controls onSubmitClick={() => setGameOver(true)} />
+          {gameOver && (
+            <GameOver score={maxScore} onNewScore={handleNewScore} />
+          )}
         </div>
       </div>
     </HotKeys>

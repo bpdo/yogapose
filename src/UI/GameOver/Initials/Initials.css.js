@@ -17,6 +17,7 @@ export default {
     fontSize: '2.5rem',
     textAlign: 'center',
     WebkitAppearance: 'none',
+    textTransform: 'uppercase',
     width: 200,
   },
 };
