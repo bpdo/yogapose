@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div
-      className='container-fluid vh-100 d-flex flex-column'
+      className='container-fluid vh-100 d-flex flex-column justify-content-center'
       style={{
         backgroundImage: `url(${Background})`,
       }}
