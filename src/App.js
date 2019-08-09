@@ -4,6 +4,7 @@ import Background from './Background.svg';
 import Controls from './UI/Controls';
 import Vectorize from './Vectorize';
 import HighScores from './UI/HighScores';
+import GameOver from './UI/GameOver';
 import PoseNet from './PoseNet';
 import PoseName from './UI/PoseName';
 import PoseScore from './UI/PoseScore';
@@ -80,6 +81,7 @@ function App() {
       </div>
       <div className='d-flex justify-content-center'>
         <Controls />
+        <GameOver />
       </div>
     </div>
   );
