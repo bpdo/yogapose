@@ -1,13 +1,17 @@
 import React from 'react';
-import HighScore from '../static/HighScore.svg';
+import HighScore from './HighScore.svg';
 
-const textStyle = {
-  color: 'white',
-};
-export default () => {
+export default ({ options }) => {
+  const { height } = options;
+
   return (
-    <div className='text-center p-0 d-flex align-items-center'>
-      <img className='img-fluid position-relative' src={HighScore} />
+    <div className='d-flex align-items-center'>
+      <img
+        alt='High Score'
+        className='img-fluid'
+        src={HighScore}
+        style={{ height }}
+      />
     </div>
   );
 };
