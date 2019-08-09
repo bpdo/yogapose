@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Glasses from './ShutterGlasses3.svg';
 
 export default ({ height, pose, width }) => {
   const imageHeight = 208;
@@ -82,7 +83,7 @@ export default ({ height, pose, width }) => {
         style={{ zIndex: 2, position: 'absolute' }}
       />
       <div style={{ display: 'none' }}>
-        <img id='image-1' src='ShutterGlasses2.svg' alt='glasses' />
+        <img id='image-1' src={Glasses} alt='glasses' />
       </div>
     </>
   );
