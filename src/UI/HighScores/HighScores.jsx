@@ -12,7 +12,7 @@ export default ({ options, leaders }) => {
 
   return (
     <div
-      className='d-flex justify-content-center align-items-center'
+      className='d-flex justify-content-center align-items-start'
       style={{
         ...styles.container,
         backgroundImage: `url(${HighScores})`,
@@ -22,7 +22,7 @@ export default ({ options, leaders }) => {
       <div>
         {leaders
           .sort(compare)
-          .slice(0, 8)
+          .slice(0, 10)
           .map((item, key) => {
             return (
               <div className='text-white' style={styles.text} key={item.id}>

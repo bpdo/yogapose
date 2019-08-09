@@ -5,6 +5,7 @@ export default {
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'contain',
     minWidth: 500,
+    paddingTop: 125,
   },
   text: {
     fontFamily: 'MvBoli',
