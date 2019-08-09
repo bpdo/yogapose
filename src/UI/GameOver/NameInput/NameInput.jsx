@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './Initials.css';
+import styles from './NameInput.css';
 
 export default ({ onInitialsChanged }) => {
   const [initials, setInitials] = useState('');
@@ -10,18 +10,18 @@ export default ({ onInitialsChanged }) => {
 
   const handleInitialsKeyPress = event => {
     if (event.key === 'Enter') {
-      onInitialsChanged(initials.toUpperCase());
+      onInitialsChanged(initials);
     }
   };
 
   return (
     <div className='d-flex flex-row mb-5 align-items-center'>
       <div className='text-white' style={styles.label}>
-        Enter your initials:
+        Enter your name:
       </div>
       <input
         autoFocus={true}
-        maxLength={3}
+        maxLength={8}
         value={initials}
         style={styles.input}
         onChange={handleInitialsChange}

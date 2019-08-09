@@ -1,5 +1,5 @@
 import React from 'react';
-import Initials from './Initials';
+import NameInput from './NameInput';
 import Score from './Score';
 import Title from './Title';
 import styles from './GameOver.css';
@@ -24,7 +24,7 @@ export default ({ score, onNewScore }) => {
         >
           <Title text='Game Over!' />
           <Score score={score} />
-          <Initials onInitialsChanged={handleInitialsChanged} />
+          <NameInput onInitialsChanged={handleInitialsChanged} />
         </div>
       </div>
       <div style={styles.overlay} />
