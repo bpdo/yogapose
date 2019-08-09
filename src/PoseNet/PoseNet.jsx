@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
+import styles from './PoseNet.css';
 
 import {
   leftEye,
@@ -173,10 +174,7 @@ export default ({ children, height, width, onPoseChange }) => {
   }
 
   return (
-    <div
-      id='main'
-      style={{ marginTop: 75, height, width, backgroundColor: 'black' }}
-    >
+    <div id='main' style={{ height, width, ...styles.container }}>
       <video
         id='video'
         playsInline
