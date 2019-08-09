@@ -5,6 +5,7 @@ import Background from './Background.svg';
 import Controls from './UI/Controls';
 import Glasses from './Glasses';
 import HighScores from './UI/HighScores';
+import GameOver from './UI/GameOver';
 import PoseNet from './PoseNet';
 import PoseName from './UI/PoseName';
 import PoseScore from './UI/PoseScore';
@@ -26,10 +27,22 @@ function App() {
   const _height = 500;
   const _width = 500;
 
+  const [gameOver, setGameOver] = useState(false);
   const [pose, setPose] = useState(null);
   const [maxScore, setScore] = useState(0);
   const [glasses, setGlasses] = useState(false);
   const [vectors, setVectors] = useState(false);
+
+  const [leaders, setLeaders] = useState([
+    { name: 'Zack', score: 23 },
+    { name: 'Kelly', score: 18 },
+    { name: 'Screech', score: 1 },
+    { name: 'Slater', score: 21 },
+    { name: 'Jessie', score: 22 },
+    { name: 'Lisa', score: 13 },
+    { name: 'Mr. B', score: 9 },
+    { name: 'Tori', score: 13 },
+  ]);
 
   const handleKeyPress = {
     GLASSES_MODE: () => setGlasses(true),
@@ -38,6 +51,12 @@ function App() {
       setVectors(false);
     },
     VECTORS_MODE: () => setVectors(true),
+  };
+
+  const handleNewScore = ({ initials, score }) => {
+    leaders.push({ name: initials, score });
+    setLeaders(leaders);
+    setGameOver(false);
   };
 
   const handlePoseChange = pose => {
@@ -87,11 +106,14 @@ function App() {
             </PoseNet>
           </div>
           <div className='d-flex'>
-            <HighScores options={{ height: _height + 100 }} />
+            <HighScores options={{ height: _height + 100 }} leaders={leaders} />
           </div>
         </div>
         <div className='d-flex justify-content-center'>
-          <Controls />
+          <Controls onSubmitClick={() => setGameOver(true)} />
+          {gameOver && (
+            <GameOver score={maxScore} onNewScore={handleNewScore} />
+          )}
         </div>
       </div>
     </HotKeys>

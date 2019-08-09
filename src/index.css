@@ -13,6 +13,12 @@ body {
   src: local('MvBoli'), url('./fonts/mvboli.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'PressStart2P';
+  src: local('PressStart2P'),
+    url('./fonts/PressStart2P-Regular.ttf') format('truetype');
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
