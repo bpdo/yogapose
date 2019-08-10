@@ -23,13 +23,11 @@ export default ({ options, leaders }) => {
         {leaders
           .sort(compare)
           .slice(0, 10)
-          .map((item, key) => {
-            return (
-              <div className='text-white' style={styles.text} key={item.id}>
-                {item.name}: {item.score}
-              </div>
-            );
-          })}
+          .map((item, index) => (
+            <div className='text-white' style={styles.text} key={index}>
+              {item.name}: {item.score}
+            </div>
+          ))}
       </div>
     </div>
   );
