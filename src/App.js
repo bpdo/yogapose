@@ -9,6 +9,7 @@ import GameOver from './UI/GameOver';
 import PoseNet from './PoseNet';
 import PoseName from './UI/PoseName';
 import PoseScore from './UI/PoseScore';
+import useInterval from './useInterval';
 import Vectorize from './Vectorize';
 import { Tadasana } from './Yoga/Pose/Tadasana';
 import { VirabhadrasanaII } from './Yoga/Pose/VirabhadrasanaII';
@@ -26,10 +27,14 @@ const _keyMap = {
 function App() {
   const _height = 500;
   const _width = 500;
+  const _levels = [Tadasana, VirabhadrasanaII];
 
+  const [playing, setPlaying] = useState(false);
+  const [level, setLevel] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [pose, setPose] = useState(null);
-  const [maxScore, setScore] = useState(0);
+  const [totalScore, setTotalScore] = useState(0);
+  const [levelScore, setLevelScore] = useState(0);
   const [glasses, setGlasses] = useState(false);
   const [vectors, setVectors] = useState(false);
 
@@ -43,6 +48,22 @@ function App() {
     { name: 'Mr. B', score: 9 },
     { name: 'Tori', score: 13 },
   ]);
+
+  useInterval(
+    () => {
+      const nextLevel = level + 1;
+
+      if (nextLevel >= _levels.length) {
+        setPlaying(false);
+        setGameOver(true);
+      }
+
+      // Your custom logic here
+      setLevel(nextLevel);
+      setLevelScore(0);
+    },
+    playing ? 10000 : null
+  );
 
   const handleKeyPress = {
     GLASSES_MODE: () => setGlasses(true),
@@ -64,7 +85,10 @@ function App() {
   };
 
   const handleScoreChange = score => {
-    if (score > maxScore) setScore(score);
+    if (score > levelScore) {
+      setTotalScore(totalScore - levelScore + score);
+      setLevelScore(score);
+    }
   };
 
   return (
@@ -80,15 +104,21 @@ function App() {
             className='d-flex flex-column position-relative'
             style={{ width: _width + 50 }}
           >
-            <PoseScore score={maxScore} />
-            <PoseName name={VirabhadrasanaII || Tadasana} />
+            {playing && <PoseScore score={totalScore} />}
+            <PoseName
+              name={
+                playing
+                  ? `Level ${level + 1}: ${_levels[level]}`
+                  : 'Press Start to Play'
+              }
+            />
             <PoseNet
               height={_height}
               width={_width}
               onPoseChange={handlePoseChange}
             >
               <Yoga
-                name={VirabhadrasanaII || Tadasana}
+                name={_levels[level]}
                 options={{
                   height: _height,
                   width: _width,
@@ -110,9 +140,12 @@ function App() {
           </div>
         </div>
         <div className='d-flex justify-content-center'>
-          <Controls onSubmitClick={() => setGameOver(true)} />
+          <Controls
+            onStartClick={() => setPlaying(true)}
+            onSubmitClick={() => setGameOver(true)}
+          />
           {gameOver && (
-            <GameOver score={maxScore} onNewScore={handleNewScore} />
+            <GameOver score={totalScore} onNewScore={handleNewScore} />
           )}
         </div>
       </div>
