@@ -77,7 +77,8 @@ function App() {
   const handleNewScore = ({ initials, score }) => {
     leaders.push({ name: initials, score });
     setLeaders(leaders);
-    setGameOver(false);
+
+    reset();
   };
 
   const handlePoseChange = pose => {
@@ -89,6 +90,14 @@ function App() {
       setTotalScore(totalScore - levelScore + score);
       setLevelScore(score);
     }
+  };
+
+  const reset = () => {
+    setLevel(0);
+    setLevelScore(0);
+    setTotalScore(0);
+    setPlaying(false);
+    setGameOver(false);
   };
 
   return (
@@ -141,8 +150,8 @@ function App() {
         </div>
         <div className='d-flex justify-content-center'>
           <Controls
+            onResetClick={() => reset()}
             onStartClick={() => setPlaying(true)}
-            onSubmitClick={() => setGameOver(true)}
           />
           {gameOver && (
             <GameOver score={totalScore} onNewScore={handleNewScore} />
