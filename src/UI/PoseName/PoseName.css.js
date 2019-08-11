@@ -4,7 +4,7 @@ export default {
     zIndex: 100,
   },
   text: {
-    bottom: 42,
+    bottom: 45,
     left: 80,
     fontFamily: 'MvBoli',
     fontSize: '1.75rem',

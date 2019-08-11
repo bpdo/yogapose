@@ -1,3 +1,6 @@
+// https://www.yogajournal.com/poses/warrior-ii-pose
+// --> Right facing
+
 import {
   leftEye,
   rightEye,
@@ -29,10 +32,10 @@ vectors[`${leftKnee}.${leftAnkle}`] = [0, -1];
 vectors[`${rightHip}.${rightKnee}`] = [-1, -1];
 vectors[`${rightKnee}.${rightAnkle}`] = [-1, -1];
 
-export const VirabhadrasanaII = 'Virabhadrasana II';
+export const WarriorII = 'Warrior II';
 
 export default {
-  name: VirabhadrasanaII,
-  otherName: 'Warrior II',
+  name: WarriorII,
+  otherName: 'Virabhadrasana II',
   vectors,
 };

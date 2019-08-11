@@ -1,29 +1,24 @@
 import React from 'react';
 import Start from './Start.svg';
 import Reset from './Reset.svg';
-import Submit from './Submit.svg';
 import styles from './Controls.css';
 
-export default ({ onSubmitClick }) => {
+export default ({ onResetClick, onStartClick }) => {
   return (
     <div className='d-flex'>
-      <img
-        className='img-fluid position-relative'
-        src={Start}
-        alt='Start'
-        style={styles.button}
-      />
-      <img
-        className='img-fluid position-relative'
-        src={Reset}
-        alt='Reset'
-        style={styles.button}
-      />
-      <button className='btn btn-link' onClick={onSubmitClick}>
+      <button className='btn btn-link' onClick={onStartClick}>
         <img
           className='img-fluid position-relative'
-          src={Submit}
-          alt='Submit'
+          src={Start}
+          alt='Start'
+          style={styles.button}
+        />
+      </button>
+      <button className='btn btn-link' onClick={onResetClick}>
+        <img
+          className='img-fluid position-relative'
+          src={Reset}
+          alt='Reset'
           style={styles.button}
         />
       </button>
