@@ -11,9 +11,8 @@ import PoseName from './UI/PoseName';
 import PoseScore from './UI/PoseScore';
 import useInterval from './useInterval';
 import Vectorize from './Vectorize';
-import { Tadasana } from './Yoga/Pose/Tadasana';
-import { VirabhadrasanaII } from './Yoga/Pose/VirabhadrasanaII';
-import Yoga from './Yoga';
+
+import { levels, score } from './GamePlay';
 
 import './fonts/mvboli.ttf';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -27,7 +26,6 @@ const _keyMap = {
 function App() {
   const _height = 500;
   const _width = 500;
-  const _levels = [Tadasana, VirabhadrasanaII];
 
   const [playing, setPlaying] = useState(false);
   const [level, setLevel] = useState(0);
@@ -53,7 +51,7 @@ function App() {
     () => {
       const nextLevel = level + 1;
 
-      if (nextLevel >= _levels.length) {
+      if (nextLevel >= levels.length) {
         setPlaying(false);
         setGameOver(true);
       }
@@ -82,14 +80,16 @@ function App() {
   };
 
   const handlePoseChange = pose => {
-    setPose(pose);
-  };
+    // score the pose
+    const _score = score(pose, level);
 
-  const handleScoreChange = score => {
-    if (score > levelScore) {
-      setTotalScore(totalScore - levelScore + score);
-      setLevelScore(score);
+    if (_score > levelScore) {
+      // update the level score
+      setTotalScore(totalScore - levelScore + _score);
+      setLevelScore(_score);
     }
+
+    setPose(pose);
   };
 
   const reset = () => {
@@ -117,7 +117,7 @@ function App() {
             <PoseName
               name={
                 playing
-                  ? `Level ${level + 1}: ${_levels[level]}`
+                  ? `Level ${level + 1}: ${levels[level]}`
                   : 'Press Start to Play'
               }
             />
@@ -126,16 +126,6 @@ function App() {
               width={_width}
               onPoseChange={handlePoseChange}
             >
-              <Yoga
-                name={_levels[level]}
-                options={{
-                  height: _height,
-                  width: _width,
-                  zIndex: 3,
-                }}
-                pose={pose}
-                onScoreChange={handleScoreChange}
-              />
               {glasses && (
                 <Glasses height={_height} pose={pose} width={_width} />
               )}

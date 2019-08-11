@@ -1,9 +1,9 @@
 import similarity from 'compute-cosine-similarity';
 
-import TadasanaModel, { Tadasana } from './Pose/Tadasana';
+import TadasanaModel, { Tadasana } from './Yoga/Poses/Tadasana';
 import VirabhadrasanaIIModel, {
   VirabhadrasanaII,
-} from './Pose/VirabhadrasanaII';
+} from './Yoga/Poses/VirabhadrasanaII';
 
 const _models = {};
 
@@ -11,7 +11,10 @@ const _models = {};
 _models[Tadasana] = TadasanaModel;
 _models[VirabhadrasanaII] = VirabhadrasanaIIModel;
 
-const score = (pose, name) => {
+export const levels = [Tadasana, VirabhadrasanaII];
+
+export const score = (pose, level) => {
+  const name = levels[level];
   let score = 0;
 
   if (pose.vectors && _models[name]) {
@@ -27,10 +30,10 @@ const score = (pose, name) => {
       }
     });
 
-    score = (score / parts.length) * 100;
+    // score the pose from 0 to 10
+    // round to one decimal place
+    score = ((score / parts.length) * 10).toFixed(0);
   }
 
   return score;
 };
-
-export default score;
