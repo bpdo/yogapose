@@ -36,7 +36,7 @@ export const score = (pose, level) => {
 
     // score the pose from 0 to 10
     // round to one decimal place
-    score = ((score / parts.length) * 10).toFixed(0);
+    score = Math.floor((score / parts.length) * 10);
   }
 
   return score;
