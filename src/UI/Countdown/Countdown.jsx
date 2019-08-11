@@ -2,7 +2,7 @@ import React from 'react';
 
 export default ({ options, timer }) => (
   <div
-    class='progress'
+    className='progress'
     style={{
       height: 10,
       width: options.width,
@@ -11,7 +11,7 @@ export default ({ options, timer }) => (
     }}
   >
     <div
-      class='progress-bar progress-bar-striped progress-bar-animated'
+      className='progress-bar progress-bar-striped progress-bar-animated'
       role='progressbar'
       style={{ width: `${timer}%` }}
       aria-valuenow='100'

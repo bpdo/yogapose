@@ -58,7 +58,7 @@ export default ({ children, height, width, onPoseChange }) => {
         // calculate vectors
         all.forEach(p1 => {
           all.forEach(p2 => {
-            if (p1 !== p2) createVector(p1, p2);
+            if (p1 !== p2) createVector(p1, p2, pose);
           });
         });
 

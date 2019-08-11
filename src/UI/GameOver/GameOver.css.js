@@ -16,13 +16,7 @@ export default {
     bottom: 0,
     left: 0,
     right: 0,
-    // backgroundAttchment: 'fixed',
     backgroundColor: 'rgba(0, 0, 0, .75)',
-    // backgroundImage: `url(${Score})`,
-    // backgroundSize: 'cover',
-    // backgroundPositionX: 'center',
-    // backgroundPositionY: 'center',
-    // backgroundRepeat: 'no-repeat',
   },
   box: { backgroundColor: 'black', minHeight: '75vh', minWidth: '75vw' },
 };
