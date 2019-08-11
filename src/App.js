@@ -20,7 +20,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const _keyMap = {
   GLASSES_MODE: ['command+alt+g'],
-  RESET_MODE: ['command+alt+r'],
   VECTORS_MODE: ['command+alt+v'],
 };
 
@@ -71,12 +70,8 @@ function App() {
   );
 
   const handleKeyPress = {
-    GLASSES_MODE: () => setGlasses(true),
-    RESET_MODE: () => {
-      setGlasses(false);
-      setVectors(false);
-    },
-    VECTORS_MODE: () => setVectors(true),
+    GLASSES_MODE: () => (glasses ? setGlasses(false) : setGlasses(true)),
+    VECTORS_MODE: () => (vectors ? setVectors(false) : setVectors(true)),
   };
 
   const handleNewScore = ({ initials, score }) => {
@@ -109,7 +104,7 @@ function App() {
   };
 
   return (
-    <HotKeys keyMap={_keyMap} handlers={handleKeyPress}>
+    <HotKeys keyMap={_keyMap} handlers={handleKeyPress} allowChanges={true}>
       <div
         className='container-fluid vh-100 d-flex flex-column justify-content-center'
         style={{
@@ -141,7 +136,7 @@ function App() {
                 <Vectorize height={_height} pose={pose} width={_width} />
               )}
             </PoseNet>
-            <Countdown options={{ width: _width }} timer={timer} />
+            {playing && <Countdown options={{ width: _width }} timer={timer} />}
           </div>
           <div className='d-flex'>
             <HighScores options={{ height: _height + 100 }} leaders={leaders} />
