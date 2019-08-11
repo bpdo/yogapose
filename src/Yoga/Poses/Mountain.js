@@ -29,10 +29,10 @@ vectors[`${leftKnee}.${leftAnkle}`] = [0, -1];
 vectors[`${rightHip}.${rightKnee}`] = [0, -1];
 vectors[`${rightKnee}.${rightAnkle}`] = [0, -1];
 
-export const Tadasana = 'Tadasana';
+export const Mountain = 'Mountain';
 
 export default {
-  name: Tadasana,
-  otherName: 'Mountain Pose',
+  name: Mountain,
+  otherName: 'Tadasana',
   vectors,
 };

@@ -15,3 +15,23 @@ export const leftKnee = 13;
 export const rightKnee = 14;
 export const leftAnkle = 15;
 export const rightAnkle = 16;
+
+export const all = [
+  nose,
+  leftEye,
+  rightEye,
+  leftEar,
+  rightEar,
+  leftShoulder,
+  rightShoulder,
+  leftElbow,
+  rightElbow,
+  leftWrist,
+  rightWrist,
+  leftHip,
+  rightHip,
+  leftKnee,
+  rightKnee,
+  leftAnkle,
+  rightAnkle,
+];

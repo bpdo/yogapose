@@ -117,7 +117,7 @@ function App() {
             <PoseName
               name={
                 playing
-                  ? `Level ${level + 1}: ${levels[level]}`
+                  ? `Level ${level + 1}: ${levels[level]} Pose`
                   : 'Press Start to Play'
               }
             />

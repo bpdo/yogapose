@@ -1,17 +1,28 @@
 import similarity from 'compute-cosine-similarity';
 
-import TadasanaModel, { Tadasana } from './Yoga/Poses/Tadasana';
-import VirabhadrasanaIIModel, {
-  VirabhadrasanaII,
-} from './Yoga/Poses/VirabhadrasanaII';
+import ChairModel, { Chair } from './Yoga/Poses/Chair';
+import MountainModel, { Mountain } from './Yoga/Poses/Mountain';
+import WarriorIModel, { WarriorI } from './Yoga/Poses/WarriorI';
+import WarriorIIModel, { WarriorII } from './Yoga/Poses/WarriorII';
+import WarriorIIIModel, { WarriorIII } from './Yoga/Poses/WarriorIII';
 
 const _models = {};
 
 // build a list of known models
-_models[Tadasana] = TadasanaModel;
-_models[VirabhadrasanaII] = VirabhadrasanaIIModel;
+_models[Chair] = ChairModel;
+_models[Mountain] = MountainModel;
+_models[WarriorI] = WarriorIModel;
+_models[WarriorII] = WarriorIIModel;
+_models[WarriorIII] = WarriorIIIModel;
 
-export const levels = [Tadasana, VirabhadrasanaII];
+export const levels = [
+  Mountain,
+  WarriorI,
+  WarriorII,
+  WarriorIII,
+  Mountain,
+  Chair,
+];
 
 export const score = (pose, level) => {
   const name = levels[level];
