@@ -2,24 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
 import styles from './PoseNet.css';
 
-import {
-  leftEye,
-  rightEye,
-  leftEar,
-  rightEar,
-  leftShoulder,
-  rightShoulder,
-  leftElbow,
-  rightElbow,
-  leftWrist,
-  rightWrist,
-  leftHip,
-  rightHip,
-  leftKnee,
-  rightKnee,
-  leftAnkle,
-  rightAnkle,
-} from './Parts';
+import { all } from './Parts';
 
 export default ({ children, height, width, onPoseChange }) => {
   const [init, setInit] = useState(false);
@@ -73,30 +56,13 @@ export default ({ children, height, width, onPoseChange }) => {
         pose.vectors = {};
 
         // calculate vectors
-        createVector(leftEye, rightEye, pose);
+        all.forEach(p1 => {
+          all.forEach(p2 => {
+            if (p1 !== p2) createVector(p1, p2);
+          });
+        });
 
-        createVector(leftEye, leftEar, pose);
-        createVector(rightEye, rightEar, pose);
-
-        createVector(leftShoulder, leftElbow, pose);
-        createVector(leftElbow, leftWrist, pose);
-
-        createVector(rightShoulder, rightElbow, pose);
-        createVector(rightElbow, rightWrist, pose);
-
-        createVector(leftShoulder, rightShoulder, pose);
-
-        createVector(leftShoulder, leftHip, pose);
-        createVector(rightShoulder, rightHip, pose);
-
-        createVector(leftHip, rightHip, pose);
-
-        createVector(leftHip, leftKnee, pose);
-        createVector(rightHip, rightKnee, pose);
-
-        createVector(leftKnee, leftAnkle, pose);
-        createVector(rightKnee, rightAnkle, pose);
-
+        // fire on pose change
         onPoseChange(pose);
       }
 
@@ -125,15 +91,15 @@ export default ({ children, height, width, onPoseChange }) => {
 
       const video = document.getElementById('video');
 
-      // const stream = await navigator.mediaDevices.getUserMedia({
-      //   audio: false,
-      //   video: {
-      //     facingMode: 'environment',
-      //     width,
-      //     height,
-      //   },
-      // });
-      // video.srcObject = stream;
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: false,
+        video: {
+          facingMode: 'environment',
+          width,
+          height,
+        },
+      });
+      video.srcObject = stream;
 
       return new Promise(resolve => {
         video.onloadedmetadata = () => {
