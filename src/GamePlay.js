@@ -15,14 +15,7 @@ _models[WarriorI] = WarriorIModel;
 _models[WarriorII] = WarriorIIModel;
 _models[WarriorIII] = WarriorIIIModel;
 
-export const levels = [
-  Mountain,
-  WarriorI,
-  WarriorII,
-  WarriorIII,
-  Mountain,
-  Chair,
-];
+export const levels = [Mountain, WarriorI, WarriorII, WarriorIII, Chair];
 
 export const score = (pose, level) => {
   const name = levels[level];

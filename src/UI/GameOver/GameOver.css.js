@@ -1,6 +1,6 @@
 export default {
   container: {
-    zIndex: 1001,
+    zIndex: 1006,
     position: 'absolute',
     top: 0,
     bottom: 0,
@@ -10,7 +10,7 @@ export default {
     width: '100vw',
   },
   overlay: {
-    zIndex: 1000,
+    zIndex: 1005,
     position: 'absolute',
     top: 0,
     bottom: 0,

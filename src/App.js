@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { HotKeys } from 'react-hotkeys';
 
 import Background from './Background.svg';
+import Countdown from './UI/Countdown';
 import Controls from './UI/Controls';
 import Glasses from './Glasses';
 import HighScores from './UI/HighScores';
@@ -27,6 +28,7 @@ function App() {
   const _height = 500;
   const _width = 500;
 
+  const [timer, setTimer] = useState(100);
   const [playing, setPlaying] = useState(false);
   const [level, setLevel] = useState(0);
   const [gameOver, setGameOver] = useState(false);
@@ -49,6 +51,11 @@ function App() {
 
   useInterval(
     () => {
+      if (timer !== 0) {
+        setTimer(timer - 10);
+        return;
+      }
+
       const nextLevel = level + 1;
 
       if (nextLevel >= levels.length) {
@@ -56,11 +63,11 @@ function App() {
         setGameOver(true);
       }
 
-      // Your custom logic here
+      setTimer(100);
       setLevel(nextLevel);
       setLevelScore(0);
     },
-    playing ? 10000 : null
+    playing ? 1000 : null
   );
 
   const handleKeyPress = {
@@ -93,6 +100,7 @@ function App() {
   };
 
   const reset = () => {
+    setTimer(100);
     setLevel(0);
     setLevelScore(0);
     setTotalScore(0);
@@ -133,6 +141,7 @@ function App() {
                 <Vectorize height={_height} pose={pose} width={_width} />
               )}
             </PoseNet>
+            <Countdown options={{ width: _width }} timer={timer} />
           </div>
           <div className='d-flex'>
             <HighScores options={{ height: _height + 100 }} leaders={leaders} />
