@@ -38,14 +38,13 @@ function App() {
   const [vectors, setVectors] = useState(false);
 
   const [leaders, setLeaders] = useState([
-    { name: 'Zack', score: 23 },
-    { name: 'Kelly', score: 18 },
+    { name: 'Zack', score: 90 },
+    { name: 'Kelly', score: 75 },
     { name: 'Screech', score: 1 },
-    { name: 'Slater', score: 21 },
-    { name: 'Jessie', score: 22 },
-    { name: 'Lisa', score: 13 },
+    { name: 'Slater', score: 90 },
+    { name: 'Jessie', score: 99 },
+    { name: 'Lisa', score: 85 },
     { name: 'Mr. B', score: 9 },
-    { name: 'Tori', score: 13 },
   ]);
 
   useInterval(
