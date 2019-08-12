@@ -134,8 +134,6 @@ export default ({ children, height, width, onPoseChange }) => {
         // [todo] update the state error
         throw e;
       }
-
-      // detectPoseInRealTime(video, net);
     }
 
     loadModel();

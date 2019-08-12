@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Glasses from './ShutterGlasses3.svg';
+import { nose, leftEye, rightEye } from '../PoseNet/Parts';
 
 export default ({ height, pose, width }) => {
-  const imageHeight = 208;
-  const imageWidth = 600;
+  const imageHeight = 100;
+  const imageWidth = 250;
 
   const [context, setContext] = useState(null);
   const [glasses, setGlasses] = useState(null);
@@ -18,39 +19,29 @@ export default ({ height, pose, width }) => {
   }, []);
 
   if (context && pose) {
-    const rightEye = pose.keypoints.find(p => p.part === 'rightEye');
-    const leftEye = pose.keypoints.find(p => p.part === 'leftEye');
-    const leftEar = pose.keypoints.find(p => p.part === 'leftEar');
-    const rightEar = pose.keypoints.find(p => p.part === 'rightEar');
+    const _nose = pose.keypoints[nose];
+    const _rightEye = pose.keypoints[rightEye];
+    const _leftEye = pose.keypoints[leftEye];
 
     context.clearRect(0, 0, height, width);
 
-    if (
-      leftEye.score >= 0.5 &&
-      rightEye.score >= 0.5 &&
-      leftEar.score >= 0.25 &&
-      rightEar.score >= 0.25
-    ) {
-      // calculate nose x point
-      const x =
-        Math.abs(rightEye.position.x - leftEye.position.x) / 2 +
-        Math.min(leftEye.position.x, rightEye.position.x);
+    if (_nose.score >= 0.5 && _leftEye.score >= 0.5 && _rightEye.score >= 0.5) {
+      // get the nose posiiton
+      const { x, y } = _nose.position;
 
-      // calculate nose y point
-      const y =
-        Math.abs(rightEye.position.y - leftEye.position.y) / 2 +
-        Math.min(leftEye.position.y, rightEye.position.y);
-
-      // determine the glasses width based on ear position
+      // calculate the glasses width based on eye position
       const glassesWidth =
-        Math.abs(leftEar.position.x - rightEar.position.x) * 1.1; // [todo] determine scale
+        Math.abs(_leftEye.position.x - _rightEye.position.x) * 2.5;
 
-      // glasses ration
+      // calculate the image ration
       const ratio = glassesWidth / imageWidth;
 
+      // calculate the height of the glasses
+      const glassesHeight = imageHeight * ratio;
+
       // calculate rotation
-      const a = rightEye.position.x - leftEye.position.x;
-      const b = rightEye.position.y - leftEye.position.y;
+      const a = _rightEye.position.x - _leftEye.position.x;
+      const b = _rightEye.position.y - _leftEye.position.y;
       const angle = Math.atan2(b, a);
 
       // translate to the nose
@@ -62,10 +53,10 @@ export default ({ height, pose, width }) => {
       // draw the glasses
       context.drawImage(
         glasses,
-        -(glassesWidth / 2),
-        -30, // [todo] determine y translation
+        (glassesWidth / 2) * -1,
+        glassesHeight * -1,
         glassesWidth,
-        imageHeight * ratio
+        glassesHeight
       );
 
       // reset the context

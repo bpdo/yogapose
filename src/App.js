@@ -38,12 +38,12 @@ function App() {
   const [vectors, setVectors] = useState(false);
 
   const [leaders, setLeaders] = useState([
-    { name: 'Zack', score: 90 },
-    { name: 'Kelly', score: 75 },
+    { name: 'Zack', score: 45 },
+    { name: 'Kelly', score: 30 },
     { name: 'Screech', score: 1 },
-    { name: 'Slater', score: 90 },
-    { name: 'Jessie', score: 99 },
-    { name: 'Lisa', score: 85 },
+    { name: 'Slater', score: 45 },
+    { name: 'Jessie', score: 49 },
+    { name: 'Lisa', score: 38 },
     { name: 'Mr. B', score: 9 },
   ]);
 
