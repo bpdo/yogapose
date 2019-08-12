@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as posenet from '@tensorflow-models/posenet';
 import styles from './PoseNet.css';
 
@@ -11,6 +11,13 @@ export default ({ children, height, width, onPoseChange }) => {
 
   const minPoseConfidence = 0.1;
   const minPartConfidence = 0.5;
+
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = onPoseChange;
+  }, [onPoseChange]);
 
   const createVector = (a, b, pose) => {
     const _p1 = pose.keypoints[a];
@@ -52,7 +59,7 @@ export default ({ children, height, width, onPoseChange }) => {
       ctx.drawImage(video, 0, 0, width, height);
       ctx.restore();
 
-      if (onPoseChange && pose.score >= minPoseConfidence) {
+      if (pose.score >= minPoseConfidence) {
         pose.vectors = {};
 
         // calculate vectors
@@ -63,7 +70,7 @@ export default ({ children, height, width, onPoseChange }) => {
         });
 
         // fire on pose change
-        onPoseChange(pose);
+        savedCallback.current(pose);
       }
 
       window.requestAnimationFrame(poseDetectionFrame);
