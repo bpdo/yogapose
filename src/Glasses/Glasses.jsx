@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Glasses from './ShutterGlasses3.svg';
 
 export default ({ height, pose, width }) => {
-  const imageHeight = 208;
-  const imageWidth = 600;
+  const imageHeight = 100;
+  const imageWidth = 250;
 
   const [context, setContext] = useState(null);
   const [glasses, setGlasses] = useState(null);
@@ -43,7 +43,7 @@ export default ({ height, pose, width }) => {
 
       // determine the glasses width based on ear position
       const glassesWidth =
-        Math.abs(leftEar.position.x - rightEar.position.x) * 1.1; // [todo] determine scale
+        Math.abs(leftEar.position.x - rightEar.position.x) * 1.15; // [todo] determine scale
 
       // glasses ration
       const ratio = glassesWidth / imageWidth;
@@ -63,7 +63,7 @@ export default ({ height, pose, width }) => {
       context.drawImage(
         glasses,
         -(glassesWidth / 2),
-        -30, // [todo] determine y translation
+        -45, // [todo] determine y translation
         glassesWidth,
         imageHeight * ratio
       );
