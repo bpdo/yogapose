@@ -7,7 +7,7 @@ export default ({ pose, height, width, zIndex }) => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const canvas = document.getElementById('vectorize');
+    const canvas = document.getElementById('keypoints');
     const _context = canvas.getContext('2d');
 
     setContext(_context);
