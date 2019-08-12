@@ -7,6 +7,7 @@ import Controls from './UI/Controls';
 import Glasses from './Glasses';
 import HighScores from './UI/HighScores';
 import GameOver from './UI/GameOver';
+import Keypoints from './Keypoints';
 import PoseNet from './PoseNet';
 import PoseName from './UI/PoseName';
 import PoseScore from './UI/PoseScore';
@@ -20,6 +21,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const _keyMap = {
   GLASSES_MODE: ['command+alt+g'],
+  KEYPOINTS_MODE: ['command+alt+k'],
   VECTORS_MODE: ['command+alt+v'],
 };
 
@@ -35,6 +37,7 @@ function App() {
   const [totalScore, setTotalScore] = useState(0);
   const [levelScore, setLevelScore] = useState(0);
   const [glasses, setGlasses] = useState(false);
+  const [keypoints, setKeypoints] = useState(false);
   const [vectors, setVectors] = useState(false);
 
   const [leaders, setLeaders] = useState([
@@ -70,6 +73,8 @@ function App() {
 
   const handleKeyPress = {
     GLASSES_MODE: () => (glasses ? setGlasses(false) : setGlasses(true)),
+    KEYPOINTS_MODE: () =>
+      keypoints ? setKeypoints(false) : setKeypoints(true),
     VECTORS_MODE: () => (vectors ? setVectors(false) : setVectors(true)),
   };
 
@@ -130,6 +135,14 @@ function App() {
             >
               {glasses && (
                 <Glasses height={_height} pose={pose} width={_width} />
+              )}
+              {keypoints && (
+                <Keypoints
+                  height={_height}
+                  pose={pose}
+                  width={_width}
+                  zIndex={4}
+                />
               )}
               {vectors && (
                 <Vectorize height={_height} pose={pose} width={_width} />
